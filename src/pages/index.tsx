@@ -159,7 +159,7 @@ export default function Home() {
 			<main
 				className={`flex h-max min-h-screen w-full grid-cols-12 flex-col bg-stone-100 ${inter.className}`}
 			>
-				<div className="container mx-auto flex max-w-4xl grow flex-col px-16 lg:px-0">
+				<div className="container mx-auto flex max-w-4xl grow flex-col px-4 lg:px-0">
 					<div className="col-span-4 flex flex-col items-start pt-16">
 						<h1 className="text-right text-5xl font-semibold">
 							Rafael Molines
