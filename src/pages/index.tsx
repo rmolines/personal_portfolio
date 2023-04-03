@@ -117,7 +117,8 @@ export default function Home() {
 			title: "VagasEmStartups.com",
 			description: "Jobs at startups from the best VC funds in Brazil",
 			logoPath: "/vagas.png",
-			videoPath: vagasScreenShot,
+			screenShot: vagasScreenShot,
+			videoPath: "",
 			type: "screenshot",
 		},
 		{
@@ -284,7 +285,7 @@ export default function Home() {
 										return (
 											<ScreenShot
 												key={ind}
-												screenShot={desc.videoPath}
+												screenShot={desc.screenShot}
 												hidden={ind !== projectInd}
 											/>
 										);
