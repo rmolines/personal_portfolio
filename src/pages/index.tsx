@@ -3,6 +3,7 @@ import { Roboto_Flex } from "next/font/google";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import vagasScreenShot from "../../public/vagas.png";
 
 const inter = Roboto_Flex({ subsets: ["latin"] });
 
@@ -33,6 +34,26 @@ function WebVideo({
 			>
 				<source src={videoPath} type="video/mp4" />
 			</video>
+		</div>
+	);
+}
+
+function ScreenShot({
+	screenShot,
+	hidden,
+}: {
+	screenShot: any;
+	hidden: boolean;
+}) {
+	return (
+		<div className={`w-full ${hidden && "hidden"} `}>
+			<Image
+				alt="screenShot"
+				src={screenShot}
+				className={`h-full w-full rounded-lg shadow-xl transition-all duration-300 ${
+					hidden && ""
+				}`}
+			/>
 		</div>
 	);
 }
@@ -92,6 +113,13 @@ export default function Home() {
 	const [isVideoMobile, setIsVideoMobiile] = useState(false);
 
 	const descriptions = [
+		{
+			title: "VagasEmStartups.com",
+			description: "Job at startups from the best VC funds in Brazil",
+			logoPath: "/vagas.png",
+			videoPath: vagasScreenShot,
+			type: "screenshot",
+		},
 		{
 			title: "Innfluenced",
 			description: "Organize and showcase content creators' work",
@@ -242,21 +270,35 @@ export default function Home() {
 							</div>
 						</div>
 						<div className="relative flex h-full w-full grow items-center bg-stone-100">
-							{descriptions.map((desc, ind) =>
-								desc.type === "app" ? (
-									<MobileVideo
-										key={ind}
-										videoPath={desc.videoPath}
-										hidden={ind !== projectInd}
-									/>
-								) : (
-									<WebVideo
-										key={ind}
-										videoPath={desc.videoPath}
-										hidden={ind !== projectInd}
-									/>
-								)
-							)}
+							{descriptions.map((desc, ind) => {
+								switch (desc.type) {
+									case "app":
+										return (
+											<MobileVideo
+												key={ind}
+												videoPath={desc.videoPath}
+												hidden={ind !== projectInd}
+											/>
+										);
+									case "screenshot":
+										return (
+											<ScreenShot
+												key={ind}
+												screenShot={desc.videoPath}
+												hidden={ind !== projectInd}
+											/>
+										);
+
+									default:
+										return (
+											<WebVideo
+												key={ind}
+												videoPath={desc.videoPath}
+												hidden={ind !== projectInd}
+											/>
+										);
+								}
+							})}
 						</div>
 					</div>
 				</div>
