@@ -122,7 +122,7 @@ export default function Home() {
 			type: "screenshot",
 		},
 		{
-			title: "Innfluenced",
+			title: "Innfluenced.me",
 			description: "Organize and showcase content creators' work",
 			logoPath: "/innfluenced.png",
 			videoPath: "/innfluenced-crop.mp4",
