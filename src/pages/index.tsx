@@ -115,7 +115,7 @@ export default function Home() {
 	const descriptions = [
 		{
 			title: "VagasEmStartups.com",
-			description: "Job at startups from the best VC funds in Brazil",
+			description: "Jobs at startups from the best VC funds in Brazil",
 			logoPath: "/vagas.png",
 			videoPath: vagasScreenShot,
 			type: "screenshot",
