@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Roboto_Flex } from "next/font/google";
-import React, { useState } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import vagasScreenShot from "../../public/vagas.png";
@@ -12,6 +12,8 @@ import {
 	ClimbingBoxLoader,
 	PacmanLoader,
 } from "react-spinners";
+import ReactPlayer, { ReactPlayerProps } from "react-player";
+import ReactPlayer from "react-player";
 
 const inter = Roboto_Flex({ subsets: ["latin"] });
 
@@ -29,6 +31,15 @@ function WebVideo({
 	hidden: boolean;
 }) {
 	const [showLoader, setShowLoader] = useState(true);
+	const playerRef = useRef<ReactPlayer>();
+
+	useEffect(() => {
+		if (playerRef.current) {
+			console.log(playerRef.current);
+			playerRef.current.seekTo(0);
+		}
+	}, [hidden]);
+
 	return (
 		<div
 			className={`relative w-full overflow-hidden rounded-lg ${
@@ -54,17 +65,20 @@ function WebVideo({
 				</div>
 			)}
 			<ReactPlayer
+				// ref={playerRef}
 				className={`z-0 w-full rounded-lg transition-all duration-300 ${
 					!showLoader && "shadow-xl "
 				} ${hidden && ""}`}
 				url={videoPath}
 				playing
 				loop
+				playsinline
 				muted
 				width="100%"
 				height="100%"
 				fallback={<BeatLoader color="#1c1917" size={20} />}
 				onBufferEnd={() => setShowLoader(false)}
+				onReady={(player) => (playerRef.current = player)}
 			/>
 		</div>
 	);
@@ -97,9 +111,19 @@ function MobileVideo({
 	videoPath: string;
 	hidden: boolean;
 }) {
+	const playerRef = useRef<HTMLVideoElement>();
+
+	useEffect(() => {
+		if (playerRef.current) {
+			console.log(playerRef.current);
+			playerRef.current.currentTime = 0;
+		}
+	}, [hidden, playerRef]);
+
 	return (
 		<div className={`inset-0 h-full w-full ${hidden && "hidden"}`}>
 			<video
+				ref={playerRef}
 				autoPlay
 				muted
 				playsInline
