@@ -371,7 +371,7 @@ export default function Home() {
 								</div>
 							</div>
 						</div>
-						<div className="relative flex h-full w-full grow items-center bg-stone-100">
+						<div className="relative mb-16 flex h-full w-full grow items-center bg-stone-100">
 							{descriptions.map((desc, ind) => {
 								// if (ind === projectInd) {
 								switch (desc.type) {
