@@ -23,6 +23,7 @@ function WebVideo({
 	videoPath: string;
 	hidden: boolean;
 }) {
+	const [showLoader, setShowLoader] = useState(true);
 	return (
 		<div
 			className={`relative w-full overflow-hidden rounded-lg shadow-xl ${
@@ -42,10 +43,15 @@ function WebVideo({
 			>
 				<source src={videoPath} type="video/mp4" />
 			</video> */}
+			{showLoader && (
+				<div className="absolute z-50 flex h-[150%] w-[150%] items-center justify-center bg-stone-100">
+					<ClimbingBoxLoader color="hsla(168, 0%, 10%, 1)" />
+				</div>
+			)}
 			<ReactPlayer
-				className={`w-full rounded-lg shadow-xl transition-all duration-300 ${
-					hidden && ""
-				}`}
+				className={`z-0 w-full rounded-lg transition-all duration-300 ${
+					!showLoader && "shadow-xl "
+				} ${hidden && ""}`}
 				url={videoPath}
 				playing
 				loop
@@ -53,6 +59,7 @@ function WebVideo({
 				width="100%"
 				height="100%"
 				fallback={<ClimbingBoxLoader color="hsla(168, 0%, 10%, 1)" />}
+				onBufferEnd={() => setShowLoader(false)}
 			/>
 		</div>
 	);
