@@ -213,7 +213,7 @@ export default function Home() {
 			screenShot: vagasScreenShot,
 			videoPath: "/vagas.mp4",
 			type: "web",
-			techStack: [nextJSLogo, tsLogo, supabaseLogo, vercelLogo],
+			techStack: [nextJSLogo, supabaseLogo, vercelLogo, tsLogo],
 		},
 		{
 			title: "Innfluenced.me",
@@ -221,7 +221,7 @@ export default function Home() {
 			logoPath: "/innfluenced.png",
 			videoPath: "/innfluenced-crop.mp4",
 			type: "web",
-			techStack: [nextJSLogo, tsLogo, supabaseLogo, vercelLogo],
+			techStack: [nextJSLogo, supabaseLogo, vercelLogo, tsLogo],
 		},
 		{
 			title: "Ticketeria",
@@ -245,7 +245,7 @@ export default function Home() {
 			logoPath: "/clam.png",
 			videoPath: "/clam.mp4",
 			type: "web",
-			techStack: [nextJSLogo, tsLogo, firebaseLogo, vercelLogo],
+			techStack: [nextJSLogo, firebaseLogo, vercelLogo, tsLogo],
 		},
 	];
 
