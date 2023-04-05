@@ -5,23 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import vagasScreenShot from "../../public/vagas.png";
 import dynamic from "next/dynamic";
-const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
-import {
-	BeatLoader,
-	CircleLoader,
-	ClimbingBoxLoader,
-	PacmanLoader,
-} from "react-spinners";
-import ReactPlayer, { ReactPlayerProps } from "react-player";
+import { BeatLoader } from "react-spinners";
 import ReactPlayer from "react-player";
 
 const inter = Roboto_Flex({ subsets: ["latin"] });
 
-function returnHidden() {
-	return new Promise((res, rej) => {
-		setTimeout(() => res("hidden"), 200);
-	});
-}
+const ReactPlayerLazy = dynamic(() => import("react-player/lazy"), {
+	ssr: false,
+});
 
 function WebVideo({
 	videoPath,
@@ -64,7 +55,7 @@ function WebVideo({
 					<BeatLoader color="#1c1917" size={20} />
 				</div>
 			)}
-			<ReactPlayer
+			<ReactPlayerLazy
 				// ref={playerRef}
 				className={`z-0 w-full rounded-lg transition-all duration-300 ${
 					!showLoader && "shadow-xl "
@@ -111,7 +102,7 @@ function MobileVideo({
 	videoPath: string;
 	hidden: boolean;
 }) {
-	const playerRef = useRef<HTMLVideoElement>();
+	const playerRef = useRef<HTMLVideoElement>(null);
 
 	useEffect(() => {
 		if (playerRef.current) {
