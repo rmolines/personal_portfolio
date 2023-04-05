@@ -23,6 +23,12 @@ import nextJSLogo from "../../public/logos/nextjs-logo.png";
 import vercelLogo from "../../public/logos/vercel-logo.png";
 import expoLogo from "../../public/logos/expo-logo.png";
 
+import vagasLogo from "../../public/vagas.png";
+import innfluencedLogo from "../../public/innfluenced.png";
+import clamLogo from "../../public/clam.png";
+import ticketeriaLogo from "../../public/ticketeria.png";
+import togatherLogo from "../../public/togather.png";
+
 const inter = Roboto_Flex({ subsets: ["latin"] });
 
 const ReactPlayerLazy = dynamic(() => import("react-player/lazy"), {
@@ -156,34 +162,36 @@ function MobileVideo({
 function ProjectDescription({
 	title,
 	description,
-	logoPath,
+	logo,
 	techStack,
 }: {
 	title: string;
 	description: string;
-	logoPath: string;
+	logo: StaticImageData;
 	techStack: StaticImageData[];
 }) {
 	return (
-		<div className="flex flex-col px-4">
-			<div className="flex">
-				<div className="aspect-square h-24">
-					<div className="relative m-auto aspect-square h-12">
-						<Image alt="logo" src={logoPath} fill />
-					</div>
+		<div className="flex w-full flex-col md:px-4">
+			<div className="flex items-center gap-x-3">
+				<div className="flex h-16 items-center">
+					<Image
+						alt="logo"
+						src={logo}
+						className="my-auto h-5/6 w-auto"
+					/>
 				</div>
-				<div>
+				<div className="flex flex-col">
 					<div className="text-left text-4xl font-medium">
 						{title}
 					</div>
 					<span className="text-left">{description}</span>
 				</div>
 			</div>
-			<div className="px-8">
+			<div className="flex w-full flex-col items-end">
 				<div className="text-left text-sm text-stone-500">
 					Tech Stack
 				</div>
-				<div className="mt-2 flex h-8 w-full gap-x-4">
+				<div className="mt-2 mb-8 flex h-8 w-full flex-wrap justify-end gap-4 md:mb-0 md:flex-nowrap">
 					{techStack.map((tech, ind) => (
 						<div key={ind} className="relative h-full">
 							<Image
@@ -209,7 +217,7 @@ export default function Home() {
 		{
 			title: "VagasEmStartups.com",
 			description: "Jobs at startups from the best VC funds in Brazil",
-			logoPath: "/vagas.png",
+			logo: vagasLogo,
 			screenShot: vagasScreenShot,
 			videoPath: "/vagas.mp4",
 			type: "web",
@@ -218,7 +226,7 @@ export default function Home() {
 		{
 			title: "Innfluenced.me",
 			description: "Organize and showcase content creators' work",
-			logoPath: "/innfluenced.png",
+			logo: innfluencedLogo,
 			videoPath: "/innfluenced-crop.mp4",
 			type: "web",
 			techStack: [nextJSLogo, supabaseLogo, vercelLogo, tsLogo],
@@ -226,7 +234,7 @@ export default function Home() {
 		{
 			title: "Ticketeria",
 			description: "Buy and resell tickets securely on WhatsApp",
-			logoPath: "/ticketeria.png",
+			logo: ticketeriaLogo,
 			videoPath: "/ticketeria.mp4",
 			type: "web",
 			techStack: [instagramLogo, notionLogo, whatsappLogo, superLogo],
@@ -234,7 +242,7 @@ export default function Home() {
 		{
 			title: "ToGather",
 			description: "Connect partygoers before and after the party",
-			logoPath: "/togather.png",
+			logo: togatherLogo,
 			videoPath: "/togather.mp4",
 			type: "app",
 			techStack: [bravoLogo, expoLogo, rnLogo],
@@ -242,7 +250,7 @@ export default function Home() {
 		{
 			title: "Clam",
 			description: "Investor relations for startups",
-			logoPath: "/clam.png",
+			logo: clamLogo,
 			videoPath: "/clam.mp4",
 			type: "web",
 			techStack: [nextJSLogo, firebaseLogo, vercelLogo, tsLogo],
@@ -287,7 +295,7 @@ export default function Home() {
 				className={`flex h-max min-h-screen w-full grid-cols-12 flex-col bg-stone-100 ${inter.className}`}
 			>
 				<div className="container mx-auto flex max-w-4xl grow flex-col px-4 lg:px-0">
-					<div className="col-span-4 flex flex-col items-start pt-16">
+					<div className="col-span-4 flex flex-col items-start pt-10">
 						<h1 className="text-right text-5xl font-semibold">
 							Rafael Molines
 						</h1>
@@ -320,9 +328,9 @@ export default function Home() {
 							</Link>
 						</div>
 					</div>
-					<div className="col-span-8 flex grow flex-col items-center gap-y-8 pt-12">
-						<div className="flex w-full flex-col items-center gap-y-4">
-							<div className="flex w-full flex-col items-end gap-y-2">
+					<div className="col-span-8 flex grow flex-col items-center pt-12">
+						<div className="flex w-full flex-col items-center">
+							<div className="flex w-full flex-col items-end">
 								<h3 className="w-full text-end text-sm font-light">
 									Projects
 								</h3>
@@ -354,16 +362,14 @@ export default function Home() {
 									))}
 								</div>
 							</div>
-							<div className="flex w-full items-start">
+							<div className="mt-12 flex w-full items-start">
 								<div className="mt-12 flex w-full justify-start">
 									<ProjectDescription
 										title={descriptions[projectInd].title}
 										description={
 											descriptions[projectInd].description
 										}
-										logoPath={
-											descriptions[projectInd].logoPath
-										}
+										logo={descriptions[projectInd].logo}
 										techStack={
 											descriptions[projectInd].techStack
 										}
@@ -371,7 +377,7 @@ export default function Home() {
 								</div>
 							</div>
 						</div>
-						<div className="relative mb-16 flex h-full w-full grow items-center bg-stone-100">
+						<div className="relative mb-16 mt-8 flex h-full w-full grow items-center bg-stone-100">
 							{descriptions.map((desc, ind) => {
 								// if (ind === projectInd) {
 								switch (desc.type) {
