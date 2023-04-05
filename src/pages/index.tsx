@@ -325,35 +325,35 @@ export default function Home() {
 						</div>
 						<div className="relative flex h-full w-full grow items-center bg-stone-100">
 							{descriptions.map((desc, ind) => {
-								if (ind === projectInd) {
-									switch (desc.type) {
-										case "app":
-											return (
-												<MobileVideo
-													key={ind}
-													videoPath={desc.videoPath}
-													hidden={ind !== projectInd}
-												/>
-											);
-										case "screenshot":
-											return (
-												<ScreenShot
-													key={ind}
-													screenShot={desc.screenShot}
-													hidden={ind !== projectInd}
-												/>
-											);
+								// if (ind === projectInd) {
+								switch (desc.type) {
+									case "app":
+										return (
+											<MobileVideo
+												key={ind}
+												videoPath={desc.videoPath}
+												hidden={ind !== projectInd}
+											/>
+										);
+									case "screenshot":
+										return (
+											<ScreenShot
+												key={ind}
+												screenShot={desc.screenShot}
+												hidden={ind !== projectInd}
+											/>
+										);
 
-										default:
-											return (
-												<WebVideo
-													key={ind}
-													videoPath={desc.videoPath}
-													hidden={ind !== projectInd}
-												/>
-											);
-									}
+									default:
+										return (
+											<WebVideo
+												key={ind}
+												videoPath={desc.videoPath}
+												hidden={ind !== projectInd}
+											/>
+										);
 								}
+								// }
 							})}
 						</div>
 					</div>
