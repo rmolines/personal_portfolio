@@ -187,7 +187,7 @@ function ProjectDescription({
 					<span className="text-left">{description}</span>
 				</div>
 			</div>
-			<div className="flex w-full flex-col items-end">
+			<div className="mt-4 flex w-full flex-col items-end">
 				<div className="text-left text-sm text-stone-500">
 					Tech Stack
 				</div>
@@ -330,11 +330,11 @@ export default function Home() {
 					</div>
 					<div className="col-span-8 flex grow flex-col items-center pt-12">
 						<div className="flex w-full flex-col items-center">
-							<div className="flex w-full flex-col items-end">
+							<div className="flex w-full flex-col items-end gap-y-2">
 								<h3 className="w-full text-end text-sm font-light">
 									Projects
 								</h3>
-								<div className="flex items-end gap-x-8">
+								<div className="flex flex-col items-end gap-y-2 gap-x-8 md:flex-row">
 									{descriptions.map((item, ind) => (
 										<button
 											key={ind}
