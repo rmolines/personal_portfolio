@@ -1,12 +1,27 @@
 import Head from "next/head";
 import { Roboto_Flex } from "next/font/google";
 import React, { RefObject, useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import vagasScreenShot from "../../public/vagas.png";
 import dynamic from "next/dynamic";
 import { BeatLoader } from "react-spinners";
 import ReactPlayer from "react-player";
+
+import awsLogo from "../../public/logos/aws-logo.png";
+import bravoLogo from "../../public/logos/bravo-logo.png";
+import firebaseLogo from "../../public/logos/firebase-logo.png";
+import instagramLogo from "../../public/logos/instagram-logo.png";
+import notionLogo from "../../public/logos/notion-logo.png";
+import reactLogo from "../../public/logos/react-logo.png";
+import rnLogo from "../../public/logos/react-native-logo.svg";
+import supabaseLogo from "../../public/logos/supabase-logo.png";
+import tsLogo from "../../public/logos/ts-logo.png";
+import superLogo from "../../public/logos/super-logo.svg";
+import whatsappLogo from "../../public/logos/whatsapp-biz-logo.svg";
+import nextJSLogo from "../../public/logos/nextjs-logo.png";
+import vercelLogo from "../../public/logos/vercel-logo.png";
+import expoLogo from "../../public/logos/expo-logo.png";
 
 const inter = Roboto_Flex({ subsets: ["latin"] });
 
@@ -37,19 +52,6 @@ function WebVideo({
 				!showLoader && "shadow-xl"
 			} ${hidden && "hidden"}`}
 		>
-			{/* <video
-				autoPlay
-				playsInline
-				muted
-				loop
-				preload="true"
-				className={`w-full rounded-lg shadow-xl transition-all duration-300 ${
-					hidden && ""
-				}`}
-				key={videoPath}
-			>
-				<source src={videoPath} type="video/mp4" />
-			</video> */}
 			{showLoader && (
 				<div className="absolute z-50 flex h-full w-full items-center justify-center bg-stone-100">
 					<BeatLoader color="#1c1917" size={20} />
@@ -155,23 +157,46 @@ function ProjectDescription({
 	title,
 	description,
 	logoPath,
+	techStack,
 }: {
 	title: string;
 	description: string;
 	logoPath: string;
+	techStack: StaticImageData[];
 }) {
 	return (
-		<>
-			<div className="aspect-square h-24">
-				<div className="relative m-auto aspect-square h-12">
-					<Image alt="logo" src={logoPath} fill />
+		<div className="flex flex-col px-4">
+			<div className="flex">
+				<div className="aspect-square h-24">
+					<div className="relative m-auto aspect-square h-12">
+						<Image alt="logo" src={logoPath} fill />
+					</div>
+				</div>
+				<div>
+					<div className="text-left text-4xl font-medium">
+						{title}
+					</div>
+					<span className="text-left">{description}</span>
 				</div>
 			</div>
-			<div>
-				<div className="text-left text-4xl font-medium">{title}</div>
-				<span className="text-left">{description}</span>
+			<div className="px-8">
+				<div className="text-left text-sm text-stone-500">
+					Tech Stack
+				</div>
+				<div className="mt-2 flex h-8 w-full gap-x-4">
+					{techStack.map((tech, ind) => (
+						<div key={ind} className="relative h-full">
+							<Image
+								src={tech}
+								alt="logo"
+								// fill
+								className="h-full w-auto"
+							/>
+						</div>
+					))}
+				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 
@@ -188,6 +213,7 @@ export default function Home() {
 			screenShot: vagasScreenShot,
 			videoPath: "/vagas.mp4",
 			type: "web",
+			techStack: [nextJSLogo, tsLogo, supabaseLogo, vercelLogo],
 		},
 		{
 			title: "Innfluenced.me",
@@ -195,6 +221,7 @@ export default function Home() {
 			logoPath: "/innfluenced.png",
 			videoPath: "/innfluenced-crop.mp4",
 			type: "web",
+			techStack: [nextJSLogo, tsLogo, supabaseLogo, vercelLogo],
 		},
 		{
 			title: "Ticketeria",
@@ -202,6 +229,7 @@ export default function Home() {
 			logoPath: "/ticketeria.png",
 			videoPath: "/ticketeria.mp4",
 			type: "web",
+			techStack: [instagramLogo, notionLogo, whatsappLogo, superLogo],
 		},
 		{
 			title: "ToGather",
@@ -209,6 +237,7 @@ export default function Home() {
 			logoPath: "/togather.png",
 			videoPath: "/togather.mp4",
 			type: "app",
+			techStack: [bravoLogo, expoLogo, rnLogo],
 		},
 		{
 			title: "Clam",
@@ -216,6 +245,7 @@ export default function Home() {
 			logoPath: "/clam.png",
 			videoPath: "/clam.mp4",
 			type: "web",
+			techStack: [nextJSLogo, tsLogo, firebaseLogo, vercelLogo],
 		},
 	];
 
@@ -325,7 +355,7 @@ export default function Home() {
 								</div>
 							</div>
 							<div className="flex w-full items-start">
-								<div className="mt-12 flex w-full max-w-lg justify-start">
+								<div className="mt-12 flex w-full justify-start">
 									<ProjectDescription
 										title={descriptions[projectInd].title}
 										description={
@@ -333,6 +363,9 @@ export default function Home() {
 										}
 										logoPath={
 											descriptions[projectInd].logoPath
+										}
+										techStack={
+											descriptions[projectInd].techStack
 										}
 									/>
 								</div>
