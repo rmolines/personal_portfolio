@@ -1,9 +1,12 @@
 import Head from "next/head";
 import { Roboto_Flex } from "next/font/google";
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import vagasScreenShot from "../../public/vagas.png";
+import dynamic from "next/dynamic";
+const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
+import { ClimbingBoxLoader } from "react-spinners";
 
 const inter = Roboto_Flex({ subsets: ["latin"] });
 
@@ -21,9 +24,14 @@ function WebVideo({
 	hidden: boolean;
 }) {
 	return (
-		<div className={`w-full ${hidden && "hidden"}`}>
-			<video
+		<div
+			className={`relative w-full overflow-hidden rounded-lg shadow-xl ${
+				hidden && "hidden"
+			}`}
+		>
+			{/* <video
 				autoPlay
+				playsInline
 				muted
 				loop
 				preload="true"
@@ -33,7 +41,19 @@ function WebVideo({
 				key={videoPath}
 			>
 				<source src={videoPath} type="video/mp4" />
-			</video>
+			</video> */}
+			<ReactPlayer
+				className={`w-full rounded-lg shadow-xl transition-all duration-300 ${
+					hidden && ""
+				}`}
+				url={videoPath}
+				playing
+				loop
+				muted
+				width="100%"
+				height="100%"
+				fallback={<ClimbingBoxLoader color="hsla(168, 0%, 10%, 1)" />}
+			/>
 		</div>
 	);
 }
@@ -70,6 +90,7 @@ function MobileVideo({
 			<video
 				autoPlay
 				muted
+				playsInline
 				loop
 				preload="true"
 				className={`mx-auto w-72 rounded-[2.5rem] shadow-xl transition-all ${
@@ -79,6 +100,26 @@ function MobileVideo({
 			>
 				<source src={videoPath} type="video/mp4" />
 			</video>
+			{/* <div
+				className={`mx-auto w-72 overflow-hidden rounded-[2.5rem] bg-stone-200 shadow-xl transition-all ${
+					hidden && ""
+				}`}
+			>
+				<ReactPlayer
+					className={`w-full rounded-[2.5rem] bg-stone-200 shadow-xl transition-all duration-300 ${
+						hidden && ""
+					}`}
+					url={videoPath}
+					playing
+					loop
+					muted
+					width="100%"
+					height="100%"
+					fallback={
+						<ClimbingBoxLoader color="hsla(168, 0%, 10%, 1)" />
+					}
+				/>
+			</div> */}
 		</div>
 	);
 }
@@ -118,8 +159,8 @@ export default function Home() {
 			description: "Jobs at startups from the best VC funds in Brazil",
 			logoPath: "/vagas.png",
 			screenShot: vagasScreenShot,
-			videoPath: "",
-			type: "screenshot",
+			videoPath: "/vagas.mp4",
+			type: "web",
 		},
 		{
 			title: "Innfluenced.me",
