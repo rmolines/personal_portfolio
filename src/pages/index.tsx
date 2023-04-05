@@ -6,7 +6,12 @@ import Link from "next/link";
 import vagasScreenShot from "../../public/vagas.png";
 import dynamic from "next/dynamic";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
-import { ClimbingBoxLoader } from "react-spinners";
+import {
+	BeatLoader,
+	CircleLoader,
+	ClimbingBoxLoader,
+	PacmanLoader,
+} from "react-spinners";
 
 const inter = Roboto_Flex({ subsets: ["latin"] });
 
@@ -26,9 +31,9 @@ function WebVideo({
 	const [showLoader, setShowLoader] = useState(true);
 	return (
 		<div
-			className={`relative w-full overflow-hidden rounded-lg shadow-xl ${
-				hidden && "hidden"
-			}`}
+			className={`relative w-full overflow-hidden rounded-lg ${
+				!showLoader && "shadow-xl"
+			} ${hidden && "hidden"}`}
 		>
 			{/* <video
 				autoPlay
@@ -44,8 +49,8 @@ function WebVideo({
 				<source src={videoPath} type="video/mp4" />
 			</video> */}
 			{showLoader && (
-				<div className="absolute z-50 flex h-[150%] w-[150%] items-center justify-center bg-stone-100">
-					<ClimbingBoxLoader color="hsla(168, 0%, 10%, 1)" />
+				<div className="absolute z-50 flex h-full w-full items-center justify-center bg-stone-100">
+					<BeatLoader color="#1c1917" size={20} />
 				</div>
 			)}
 			<ReactPlayer
@@ -58,7 +63,7 @@ function WebVideo({
 				muted
 				width="100%"
 				height="100%"
-				fallback={<ClimbingBoxLoader color="hsla(168, 0%, 10%, 1)" />}
+				fallback={<BeatLoader color="#1c1917" size={20} />}
 				onBufferEnd={() => setShowLoader(false)}
 			/>
 		</div>
