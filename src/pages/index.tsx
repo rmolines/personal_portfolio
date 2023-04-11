@@ -7,7 +7,7 @@ import vagasScreenShot from "../../public/vagas.png";
 import dynamic from "next/dynamic";
 import { BeatLoader } from "react-spinners";
 import ReactPlayer from "react-player";
-
+import { HiOutlineExternalLink } from "react-icons/hi";
 import awsLogo from "../../public/logos/aws-logo.png";
 import bravoLogo from "../../public/logos/bravo-logo.png";
 import firebaseLogo from "../../public/logos/firebase-logo.png";
@@ -164,11 +164,13 @@ function ProjectDescription({
 	description,
 	logo,
 	techStack,
+	link,
 }: {
 	title: string;
 	description: string;
 	logo: StaticImageData;
 	techStack: StaticImageData[];
+	link?: string;
 }) {
 	return (
 		<div className="flex w-full flex-col md:px-4">
@@ -181,8 +183,19 @@ function ProjectDescription({
 					/>
 				</div>
 				<div className="flex flex-col">
-					<div className="text-left text-4xl font-medium">
-						{title}
+					<div className="flex items-center gap-x-1">
+						<div className="text-left text-4xl font-medium">
+							{title}
+						</div>
+						{link && (
+							<Link
+								href={link}
+								target="_blank"
+								className="text-left text-3xl font-bold text-gray-400 hover:text-gray-900"
+							>
+								<HiOutlineExternalLink />
+							</Link>
+						)}
 					</div>
 					<span className="text-left">{description}</span>
 				</div>
@@ -216,6 +229,7 @@ export default function Home() {
 	const descriptions = [
 		{
 			title: "VagasEmStartups.com",
+			link: "https://www.vagasemstartups.com",
 			description:
 				"Find at jobs at startups from the best VC funds in Brazil",
 			logo: vagasLogo,
@@ -374,6 +388,7 @@ export default function Home() {
 										techStack={
 											descriptions[projectInd].techStack
 										}
+										link={descriptions[projectInd].link}
 									/>
 								</div>
 							</div>
